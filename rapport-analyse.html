@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rapport d'analyse — Contenus problématiques</title>
+<style>
+  :root {
+    --bg: #fafafa;
+    --card: #fff;
+    --border: #e0e0e0;
+    --text: #222;
+    --muted: #666;
+    --red: #c0392b;
+    --red-bg: #fdedec;
+    --orange: #e67e22;
+    --orange-bg: #fef5e7;
+    --yellow: #f1c40f;
+    --yellow-bg: #fef9e7;
+    --blue: #2980b9;
+    --blue-bg: #ebf5fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Segoe UI", system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 2rem; max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 1.6rem; margin-bottom: .3rem; }
+  .subtitle { color: var(--muted); margin-bottom: 2rem; font-size: .95rem; }
+  h2 { font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--border); padding-bottom: .4rem; }
+  h3 { font-size: 1.05rem; margin: 1.5rem 0 .5rem; }
+  .video-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem; margin-bottom: 1.5rem; }
+  .video-card .meta { font-size: .85rem; color: var(--muted); margin-bottom: .5rem; }
+  .video-card .meta span { margin-right: 1rem; }
+  .severity-high { border-left: 4px solid var(--red); background: var(--red-bg); }
+  .severity-medium { border-left: 4px solid var(--orange); background: var(--orange-bg); }
+  .severity-low { border-left: 4px solid var(--yellow); background: var(--yellow-bg); }
+  .severity-info { border-left: 4px solid var(--blue); background: var(--blue-bg); }
+  .finding { padding: .8rem 1rem; margin: .6rem 0; border-radius: 4px; }
+  .finding .label { font-weight: 700; font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; margin-bottom: .3rem; }
+  .severity-high .label { color: var(--red); }
+  .severity-medium .label { color: var(--orange); }
+  .severity-low .label { color: var(--yellow); }
+  .severity-info .label { color: var(--blue); }
+  blockquote { border-left: 3px solid var(--border); padding-left: .8rem; margin: .5rem 0; color: #444; font-style: italic; }
+  .tag { display: inline-block; font-size: .75rem; padding: 2px 8px; border-radius: 12px; margin-right: 4px; font-weight: 600; }
+  .tag-haine { background: #e74c3c; color: #fff; }
+  .tag-racisme { background: #9b59b6; color: #fff; }
+  .tag-violence { background: #e67e22; color: #fff; }
+  .tag-deshumanisation { background: #34495e; color: #fff; }
+  .tag-discrimination { background: #2980b9; color: #fff; }
+  .tag-complotisme { background: #7f8c8d; color: #fff; }
+  .tag-xenophobie { background: #c0392b; color: #fff; }
+  .tag-antisemitisme { background: #8e44ad; color: #fff; }
+  .source { font-size: .8rem; color: var(--muted); }
+  .legal { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem; margin: 1.5rem 0; }
+  .legal h3 { margin-top: 0; }
+  .legal ul { padding-left: 1.5rem; }
+  .legal li { margin-bottom: .4rem; }
+  .summary-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  .summary-table th, .summary-table td { padding: .5rem .8rem; border: 1px solid var(--border); text-align: left; font-size: .9rem; }
+  .summary-table th { background: #f5f5f5; font-weight: 600; }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+  .dot-high { background: var(--red); }
+  .dot-medium { background: var(--orange); }
+  .dot-low { background: var(--yellow); }
+  footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: .8rem; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<h1>Rapport d'analyse — Contenus problématiques</h1>
+<p class="subtitle">Analyse automatisée des sous-titres et commentaires extraits par Marquis &mdash; 10 février 2026</p>
+
+<!-- ============================================================ -->
+<h2>Synthèse</h2>
+
+<table class="summary-table">
+<thead>
+  <tr><th>Vidéo</th><th>Plateforme</th><th>Niveau de risque</th><th>Catégories identifiées</th></tr>
+</thead>
+<tbody>
+  <tr>
+    <td>« Question aux gauchistes : si l'Afrique est si formidable… »</td>
+    <td>TikTok</td>
+    <td><span class="dot dot-high"></span>Élevé</td>
+    <td><span class="tag tag-racisme">Racisme</span><span class="tag tag-xenophobie">Xénophobie</span><span class="tag tag-deshumanisation">Déshumanisation</span><span class="tag tag-haine">Appel à la haine</span></td>
+  </tr>
+  <tr>
+    <td>« Vive le Christ, vive la France et vive le Roi ! »</td>
+    <td>TikTok</td>
+    <td><span class="dot dot-medium"></span>Moyen</td>
+    <td><span class="tag tag-haine">Appel à la haine</span><span class="tag tag-complotisme">Complotisme</span></td>
+  </tr>
+  <tr>
+    <td>« On n'aurait jamais dû l'abolir : La Peine de Mort »</td>
+    <td>YouTube</td>
+    <td><span class="dot dot-high"></span>Élevé</td>
+    <td><span class="tag tag-violence">Apologie de la violence</span><span class="tag tag-deshumanisation">Déshumanisation</span><span class="tag tag-xenophobie">Xénophobie</span><span class="tag tag-haine">Appel à la haine</span><span class="tag tag-antisemitisme">Antisémitisme</span></td>
+  </tr>
+</tbody>
+</table>
+
+<!-- ============================================================ -->
+<h2>1. TikTok — @unebonnedroite</h2>
+<div class="video-card">
+  <div class="meta">
+    <span><strong>Titre :</strong> Question aux gauchistes : si l'Afrique est si formidable, pourquoi…</span><br>
+    <span><strong>Date :</strong> 26/12/2024</span>
+    <span><strong>Compte :</strong> @unebonnedroite</span>
+  </div>
+  <h3>Sous-titres (discours du vidéaste)</h3>
+
+  <div class="finding severity-medium">
+    <div class="label"><span class="tag tag-xenophobie">Xénophobie</span> Rhétorique anti-immigration essentialisante</div>
+    <p>Le discours présente l'immigration comme un problème intrinsèque lié aux cultures d'origine. Il réduit les populations africaines et musulmanes à des groupes monolithiques qu'il faudrait « sauver » de leur propre culture, suggérant une hiérarchie civilisationnelle implicite.</p>
+    <blockquote>« Il faudrait sauver les Africains de l'Afrique, c'est-à-dire que l'Afrique est l'enfer sur terre. [...] Il faudrait sauver les musulmans de l'islam. »</blockquote>
+    <p class="source">Source : sous-titres, vidéo entière</p>
+  </div>
+
+  <h3>Commentaires</h3>
+
+  <div class="finding severity-high">
+    <div class="label"><span class="tag tag-racisme">Racisme</span> Ségrégation raciale explicite</div>
+    <blockquote>« Que toutes les races restent sur la terre de leur ancêtres, c'est remettre l'église au centre du village et tout le monde sera heureux »</blockquote>
+    <p class="source">— 🤫INVINCIBLE💪🏻</p>
+  </div>
+
+  <div class="finding severity-high">
+    <div class="label"><span class="tag tag-racisme">Racisme</span><span class="tag tag-xenophobie">Xénophobie</span> Ethno-nationalisme</div>
+    <blockquote>« La France aux Français. Je suis pour la doctrine du chacun chez soi. On vit mieux dans un pays ethniquement homogène. »</blockquote>
+    <p class="source">— Gary le patriote</p>
+  </div>
+
+  <div class="finding severity-high">
+    <div class="label"><span class="tag tag-racisme">Racisme</span> Racisme biologique — négationnisme de l'égalité humaine</div>
+    <blockquote>« Les gauchistes croient que l'inné n'existe pas et que tout est acquis [...] Ils croient sincèrement qu'un africain peut devenir européen simplement en vivant en Europe. C'est évidemment complètement faux. »</blockquote>
+    <p>Ce commentaire reprend la thèse du déterminisme racial (les différences entre populations seraient innées et irréductibles). C'est la définition même du racisme au sens juridique français.</p>
+    <p class="source">— vladimirProteine</p>
+  </div>
+
+  <div class="finding severity-high">
+    <div class="label"><span class="tag tag-racisme">Racisme</span> Objectification raciste</div>
+    <blockquote>« le complexe du sauveur. waa trop mignon ce petit noir je vais en adopter un »</blockquote>
+    <p class="source">— Jhoni Speedball</p>
+  </div>
+
+  <div class="finding severity-medium">
+    <div class="label"><span class="tag tag-xenophobie">Xénophobie</span> Appel à la recolonisation</div>
+    <blockquote>« La vraie solution est la recolonisation. Apporter en Afrique ce qu'ils viennent chercher en Europe. Un deal "ressources naturelles" en échange d'un système de revenu universel pour les locaux. »</blockquote>
+    <p>Apologie du colonialisme sous couvert de « solution pragmatique ».</p>
+    <p class="source">— Gloria Mundis</p>
+  </div>
+
+  <div class="finding severity-medium">
+    <div class="label"><span class="tag tag-deshumanisation">Déshumanisation</span> Langage déshumanisant</div>
+    <blockquote>« les démon viennent de l'enfer »</blockquote>
+    <p>En contexte, ce commentaire assimile les immigrés à des démons — déshumanisation à caractère religieux.</p>
+    <p class="source">— rsQ8</p>
+  </div>
+
+  <div class="finding severity-medium">
+    <div class="label"><span class="tag tag-haine">Appel à la haine</span> Langage haineux envers un groupe politique</div>
+    <blockquote>« ils sont complètement cons ces gauchiasses »</blockquote>
+    <blockquote>« Qu'on envoi les gauchiasses en afrique 😅 »</blockquote>
+    <p class="source">— gino5, perfectdock77</p>
+  </div>
+
+  <div class="finding severity-medium">
+    <div class="label"><span class="tag tag-xenophobie">Xénophobie</span> Discours xénophobe sur l'immigration chiffrée</div>
+    <blockquote>« On logent 340000 personnes légalement tout les ans … c'est l'équivalent de la ville de Nice 🤢🤢 »</blockquote>
+    <p>L'utilisation des émojis de dégoût associés à l'accueil de personnes traduit une déshumanisation.</p>
+    <p class="source">— Titi_de_Nice</p>
+  </div>
+
+  <div class="finding severity-low">
+    <div class="label"><span class="tag tag-xenophobie">Xénophobie</span> Stéréotype anti-immigrés</div>
+    <blockquote>« certains viennent ici pour de mauvaises raisons et nous détestent »</blockquote>
+    <p class="source">— Valou7591💙🤍❤️</p>
+  </div>
+
+  <div class="finding severity-low">
+    <div class="label"><span class="tag tag-xenophobie">Xénophobie</span> Rejet de l'accueil</div>
+    <blockquote>« S'ils les aiment tant, qu'ils les prennent chez eux, et assument avec leur argent. Mais pas le notre. »</blockquote>
+    <blockquote>« si chacun vivrait chez soi ça serait beaucoup mieux »</blockquote>
+    <p class="source">— wackyseb, BestOfDuPauvre</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>2. TikTok — @labonnedroite (Papacito)</h2>
+<div class="video-card">
+  <div class="meta">
+    <span><strong>Titre :</strong> Vive le Christ, vive la France et vive le Roi ! ✝️⚜️</span><br>
+    <span><strong>Date :</strong> 14/09/2025</span>
+    <span><strong>Compte :</strong> @labonnedroite</span>
+  </div>
+  <h3>Sous-titres (discours du vidéaste)</h3>
+
+  <div class="finding severity-medium">
+    <div class="label"><span class="tag tag-haine">Appel à la haine</span><span class="tag tag-complotisme">Complotisme</span> Assimilation de la République au satanisme</div>
+    <blockquote>« La République, le satanisme, la franc-maçonnerie sont les fondements de la République. [...] On est dans un pays qui a été bâti sur des fondations sataniques. »</blockquote>
+    <p>Ce discours qualifie les institutions républicaines françaises de « sataniques », désigne la République comme une « offense à Dieu » et assimile les citoyens non-traditionalistes à des « matrixés ». Il s'agit d'un discours d'incitation à la haine des institutions démocratiques, doublé d'un complotisme anti-maçonnique.</p>
+    <p class="source">Source : sous-titres, vidéo entière</p>
+  </div>
+
+  <div class="finding severity-medium">
+    <div class="label"><span class="tag tag-deshumanisation">Déshumanisation</span> Pathologisation de la société</div>
+    <blockquote>« On est dans un pays de malade mental, on est dans un pays malade. »</blockquote>
+    <p>Instrumentalisation de la maladie mentale pour disqualifier l'ensemble de la société française contemporaine.</p>
+    <p class="source">Source : sous-titres</p>
+  </div>
+
+  <h3>Commentaires</h3>
+
+  <div class="finding severity-medium">
+    <div class="label"><span class="tag tag-haine">Appel à la haine</span> Discours millénariste anti-républicain</div>
+    <blockquote>« la France a choisi le mauvais roi Satan et il faut qu'elle se retourne vers le Roi des Roi Jésus-Christ notre Seigneur pour se diriger vers la vie. Car actuellement elle se dirige vers la mort et on le voit tous les jours... »</blockquote>
+    <p class="source">— Fille_de_Dieu</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>3. YouTube — @Valeknoraje</h2>
+<div class="video-card">
+  <div class="meta">
+    <span><strong>Titre :</strong> On n'aurait jamais dû l'abolir : La Peine de Mort</span><br>
+    <span><strong>Date :</strong> 16/11/2025</span>
+    <span><strong>Compte :</strong> @Valeknoraje</span>
+  </div>
+  <h3>Sous-titres (discours du vidéaste)</h3>
+
+  <div class="finding severity-high">
+    <div class="label"><span class="tag tag-violence">Apologie de la violence</span><span class="tag tag-deshumanisation">Déshumanisation</span> Apologie de la peine de mort et déshumanisation des condamnés</div>
+    <p>L'ensemble de la vidéo constitue un plaidoyer en faveur du rétablissement de la peine de mort. Le vidéaste emploie un vocabulaire déshumanisant systématique :</p>
+    <blockquote>« Que faire d'un usible pareil ? Chercher une pelle premier prix au brique au dépôt et l'enterrer au fond du jardin ? Un coup de 12 et s'en servir comme engrais ? »</blockquote>
+    <blockquote>« C'est comme l'amputation d'une jambe gangrainée [...] On ne la guérit pas. On évite par contre qu'elle se propage. »</blockquote>
+    <blockquote>« aurait tout d'abord expié leur méfet avec une planche et un sodo, puis aurait fait une séance de kiné avec une lame de 50 cm »</blockquote>
+    <p>Le vidéaste compare les condamnés à de la vermine, des « jambes gangrenées » et emploie un humour sadique pour évoquer la torture et l'exécution.</p>
+    <p class="source">Source : sous-titres, vidéo entière</p>
+  </div>
+
+  <div class="finding severity-high">
+    <div class="label"><span class="tag tag-haine">Appel à la haine</span> Injures et appel à la haine envers Robert Badinter</div>
+    <blockquote>« la crapule Robert Badter [...] ce genre de vermine comme Robert Banter »</blockquote>
+    <blockquote>« Comme si le mal était juste une erreur de calcul de la société. [...] Alors non, bande de dégénéré [...] »</blockquote>
+    <p>Injures et propos haineux visant une personnalité publique décédée, qualifiée de « crapule » et de « vermine ».</p>
+    <p class="source">Source : sous-titres</p>
+  </div>
+
+  <div class="finding severity-high">
+    <div class="label"><span class="tag tag-xenophobie">Xénophobie</span> Discours xénophobe ciblé</div>
+    <blockquote>« ce monstre dégénéré qui n'avait rien à faire sur le sol français »</blockquote>
+    <p>En parlant de la meurtrière de Lola (d'origine algérienne), le vidéaste utilise le crime pour alimenter un discours anti-immigration, réduisant l'individu à son origine.</p>
+    <p class="source">Source : sous-titres</p>
+  </div>
+
+  <h3>Commentaires</h3>
+
+  <div class="finding severity-high">
+    <div class="label"><span class="tag tag-violence">Apologie de la violence</span><span class="tag tag-deshumanisation">Déshumanisation</span> Appels à la torture et aux traitements inhumains</div>
+    <blockquote>« Condamnation à perpétuité dans des travaux forcés [...] 20H24, 7j7, nourrit avec le strict minimum [...] il servira alors de cobaye pour des expériences en tout genre »</blockquote>
+    <p class="source">— @handsomejedive4658</p>
+    <blockquote>« Pourquoi pas des combats de gladiateurs ? Tant qu'à faire autant mêler l'utile à l'agréable »</blockquote>
+    <p class="source">— @JK-hd9raton</p>
+    <blockquote>« Avec la possibilité de parier dessus au PMU du coin, ça donnerait une utilité à cette vermine, renflouer les caisses et nous divertir. »</blockquote>
+    <p class="source">— @ginatack</p>
+    <blockquote>« Pour avec exécution en place publique comme ça se faisait jusque dans les années 30. »</blockquote>
+    <p class="source">— @maxlegirondin6917</p>
+  </div>
+
+  <div class="finding severity-high">
+    <div class="label"><span class="tag tag-antisemitisme">Antisémitisme</span><span class="tag tag-violence">Violence</span> Propos antisémites et appel à la profanation</div>
+    <blockquote>« Pour. Et pour qu'on déterre Badinter on condamne son cadavre à mort on l'exécute et on expédie son cadavre sur Tel Aviv. »</blockquote>
+    <p>Appel à la profanation d'une sépulture avec renvoi à Tel Aviv — association explicite entre Badinter et Israël, mobilisant le stéréotype antisémite de la double allégeance.</p>
+    <p class="source">— @Czbstckio</p>
+  </div>
+
+  <div class="finding severity-high">
+    <div class="label"><span class="tag tag-antisemitisme">Antisémitisme</span> Allusion antisémite à la Shoah</div>
+    <blockquote>« Si seulement Badinter n'avait pas survécu pendant l'OA (j'utilise des initiales pour éviter les problèmes, mais vous voyez de quoi je parles) 😊 »</blockquote>
+    <p>« OA » désigne ici l'Occupation allemande. L'auteur regrette que Badinter ait survécu à la Shoah. Apologie implicite du génocide.</p>
+    <p class="source">— @arthurtoribio420</p>
+  </div>
+
+  <div class="finding severity-high">
+    <div class="label"><span class="tag tag-haine">Appel à la haine</span><span class="tag tag-violence">Violence</span> Menace et appel à la violence politique</div>
+    <blockquote>« T'es pas français, tu trahis toutes les valeurs de la France [...] Tu es donc un traitre, et tu devrais être traité comme tel. Quel sort réserve-t-on déjà aux traîtres ? »</blockquote>
+    <p>Menace implicite de mort à l'encontre du vidéaste, doublée d'un déni de nationalité.</p>
+    <p class="source">— @g.j.c.1280</p>
+  </div>
+
+  <div class="finding severity-medium">
+    <div class="label"><span class="tag tag-xenophobie">Xénophobie</span> Discours xénophobe</div>
+    <blockquote>« Le problème c'est les arabes qui ne veulent pas pour certains s'intégrer »</blockquote>
+    <p>Essentialisation d'un groupe ethnique entier.</p>
+    <p class="source">— @sarahlaslp9890</p>
+  </div>
+
+  <div class="finding severity-medium">
+    <div class="label"><span class="tag tag-xenophobie">Xénophobie</span> Expression « Jeunistan »</div>
+    <blockquote>« tu te fais agresser par un jeune du jeunistan »</blockquote>
+    <p>Néologisme xénophobe associant délinquance et immigration par le suffixe « -istan ».</p>
+    <p class="source">— @DivingHawker</p>
+  </div>
+
+  <div class="finding severity-medium">
+    <div class="label"><span class="tag tag-complotisme">Complotisme</span> Complotisme anti-maçonnique / antisémite</div>
+    <blockquote>« des gzns avec un compas et un triangle... »</blockquote>
+    <p>Allusion à la franc-maçonnerie comme main invisible contrôlant la justice — trope complotiste classique.</p>
+    <p class="source">— @user-uu6mh4sd2u</p>
+  </div>
+
+  <div class="finding severity-medium">
+    <div class="label"><span class="tag tag-complotisme">Complotisme</span><span class="tag tag-haine">Haine</span> Théorie du complot islamiste</div>
+    <blockquote>« Cette monstruosité n'est possible que grâce à notre merveilleuse dictature islamo-gauchiste ! »</blockquote>
+    <p class="source">— @fernanddelamothe-cadillac3611</p>
+  </div>
+
+  <div class="finding severity-medium">
+    <div class="label"><span class="tag tag-xenophobie">Xénophobie</span> Stéréotype anti-arabe</div>
+    <blockquote>« c'est aussi sûr que lorsqu'un wesh dit wallah. »</blockquote>
+    <p>Stéréotype raciste visant les personnes d'origine maghrébine/arabe.</p>
+    <p class="source">— @sbt4625</p>
+  </div>
+
+  <div class="finding severity-medium">
+    <div class="label"><span class="tag tag-violence">Violence</span> Appel à la violence contre les institutions</div>
+    <blockquote>« Tant que le peuple ne sortira pas les doigts et anéantir ce système mortifère… rien ne se passera. »</blockquote>
+    <p class="source">— @adriencalvary556</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>Cadre juridique applicable</h2>
+
+<div class="legal">
+  <h3>Droit pénal français</h3>
+  <ul>
+    <li><strong>Article 24 de la loi du 29 juillet 1881</strong> — Provocation à la discrimination, à la haine ou à la violence envers une personne ou un groupe en raison de son origine, ethnie, nation, race ou religion. <em>Peine : 1 an d'emprisonnement et 45 000 € d'amende.</em></li>
+    <li><strong>Article R. 625-7 du Code pénal</strong> — Provocation non publique à la discrimination, la haine ou la violence raciale. <em>Contravention de 5<sup>e</sup> classe.</em></li>
+    <li><strong>Article 24 bis de la loi de 1881</strong> — Contestation de crimes contre l'humanité (le commentaire regrettant la survie de Badinter pendant la Shoah relève potentiellement de l'apologie de crime contre l'humanité).</li>
+    <li><strong>Article 225-1 du Code pénal</strong> — Discrimination fondée sur l'origine, l'ethnie ou la race.</li>
+    <li><strong>Article 433-5 du Code pénal</strong> — Outrage à une institution de la République.</li>
+    <li><strong>Article 222-17 du Code pénal</strong> — Menaces de mort (menaces implicites dans certains commentaires).</li>
+  </ul>
+
+  <h3>Droit européen</h3>
+  <ul>
+    <li><strong>Décision-cadre 2008/913/JAI</strong> — Lutte contre certaines formes et manifestations de racisme et de xénophobie au moyen du droit pénal.</li>
+    <li><strong>Digital Services Act (DSA)</strong> — Obligations de modération des plateformes face aux contenus illicites, notamment les discours de haine.</li>
+  </ul>
+
+  <h3>Conditions générales des plateformes</h3>
+  <ul>
+    <li><strong>TikTok</strong> — Les « Community Guidelines » interdisent les discours haineux, le racisme, la xénophobie et l'apologie de la violence.</li>
+    <li><strong>YouTube</strong> — La politique sur les discours haineux interdit les contenus promouvant la violence ou la haine contre des individus ou groupes basés sur des attributs protégés.</li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<h2>Conclusion</h2>
+
+<p>L'analyse des trois vidéos révèle un <strong>écosystème de contenus d'extrême droite</strong> qui se nourrissent mutuellement entre créateurs et commentateurs. Les principaux schémas identifiés :</p>
+
+<ol style="padding-left: 1.5rem; margin: 1rem 0;">
+  <li><strong>Déshumanisation systématique</strong> — Les personnes issues de l'immigration sont réduites à des catégories (« races », « démons ») ou à un problème à « résoudre ». Les adversaires politiques sont qualifiés de « malades mentaux » ou de « dégénérés ».</li>
+  <li><strong>Racisme décomplexé</strong> — Plusieurs commentaires expriment ouvertement un racisme biologique (« un africain ne peut pas devenir européen ») ou appellent à la ségrégation ethnique (« pays ethniquement homogène »), tombant directement sous le coup de la loi de 1881.</li>
+  <li><strong>Apologie de la violence</strong> — La vidéo YouTube et ses commentaires normalisent la torture, les exécutions publiques et les traitements inhumains sous couvert de « justice ».</li>
+  <li><strong>Antisémitisme</strong> — Deux commentaires YouTube ciblent explicitement Robert Badinter avec des propos antisémites, dont l'un regrette sa survie à la Shoah.</li>
+  <li><strong>Complotisme anti-républicain</strong> — La République est présentée comme une construction « satanique » ou contrôlée par des forces occultes (franc-maçonnerie), délégitimant les institutions démocratiques.</li>
+</ol>
+
+<p>Plusieurs de ces contenus (en particulier les commentaires à caractère raciste, les propos antisémites et les appels à la violence) sont <strong>susceptibles de constituer des infractions pénales</strong> au regard du droit français et pourraient faire l'objet de signalements auprès de la plateforme PHAROS ou des procureurs compétents.</p>
+
+<footer>
+  Rapport généré automatiquement par Marquis — Outil d'extraction et d'analyse de contenus vidéo.<br>
+  Ce rapport ne constitue pas un avis juridique. Les qualifications pénales suggérées nécessitent une analyse par un professionnel du droit.
+</footer>
+
+</body>
+</html>
